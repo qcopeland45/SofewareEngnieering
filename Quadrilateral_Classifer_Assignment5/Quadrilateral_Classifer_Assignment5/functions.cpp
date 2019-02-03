@@ -19,7 +19,6 @@ bool isBetweenZeroAndOneHundred(const std::vector<double>& points)
 {
     for (const auto& num : points) {
         if (num > 100 || num < 0) {
-            //std::cout << "Error 1 NUMBER MUST BE BETWEEN 0 AND 100: \n";
             return true;
         }
     }

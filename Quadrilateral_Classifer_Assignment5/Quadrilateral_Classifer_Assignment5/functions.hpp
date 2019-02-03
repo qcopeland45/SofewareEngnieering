@@ -59,7 +59,7 @@ void printCorrectShape(const Quadrilateral& q);
 int FindNeighborRef(int ref);
 
 
-/******************************ERROR TEST FUNCTIONS****************************/
+/******************************ERROR TEST FUNCTIONS**********************/
 
 bool isErrorTypeOne(std::string& line);
 
