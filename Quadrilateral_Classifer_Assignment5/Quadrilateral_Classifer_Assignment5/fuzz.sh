@@ -1,10 +1,10 @@
 #!/bin/bash
 
 
-clang++ -std=c++14 -fprofile-instr-generate -fcoverage-mapping main.cpp functions.cpp -o main
+clang++ -std=c++14 -O1 -g -fsanitize=address -fprofile-instr-generate -fcoverage-mapping main.cpp functions.cpp -o main
 LLVM_PROFILE_FILE="main.profraw" ./main < testFiles/square.txt > testFiles/squareOutput.txt
 #./main < testFiles/square.txt > testFiles/squareOutput.txt
-#diff testFiles/squareOutput.txt testFiles/squareExpected.txt
+diff testFiles/squareOutput.txt testFiles/squareExpected.txt
 
 err=$?
 if [ $err -eq 0 ]
@@ -18,10 +18,10 @@ else
 fi
 
 
-clang++ -std=c++14 -fprofile-instr-generate -fcoverage-mapping main.cpp functions.cpp -o main1
+clang++ -std=c++14 -O1 -g -fsanitize=address -fprofile-instr-generate -fcoverage-mapping main.cpp functions.cpp -o main1
 LLVM_PROFILE_FILE="main1.profraw" ./main1 < testFiles/rectangle.txt > testFiles/rectangleOutput.txt
 #./main < testFiles/rectangle.txt > testFiles/rectangleOutput.txt
-#diff testFiles/rectangleOutput.txt testFiles/rectangleExpected.txt
+diff testFiles/rectangleOutput.txt testFiles/rectangleExpected.txt
 
 err2=$?
 if [ $err2 -eq 0 ]
@@ -36,10 +36,10 @@ fi
 
 
 
-clang++ -std=c++14 -fprofile-instr-generate -fcoverage-mapping main.cpp functions.cpp -o main2
+clang++ -std=c++14 -O1 -g -fsanitize=address -fprofile-instr-generate -fcoverage-mapping main.cpp functions.cpp -o main2
 LLVM_PROFILE_FILE="main2.profraw" ./main2 < testFiles/rhombus.txt > testFiles/rhombusOutput.txt
 #./main < testFiles/rhombus.txt > testFiles/rhombusOutput.txt
-#diff testFiles/rhombusOutput.txt testFiles/rhombusExpected.txt
+diff testFiles/rhombusOutput.txt testFiles/rhombusExpected.txt
 
 err3=$?
 if [ $err3 -eq 0 ]
@@ -54,16 +54,16 @@ fi
 
 
 
-clang++ -std=c++14 -fprofile-instr-generate -fcoverage-mapping main.cpp functions.cpp -o main3
+clang++ -std=c++14 -O1 -g -fsanitize=address -fprofile-instr-generate -fcoverage-mapping main.cpp functions.cpp -o main3
 LLVM_PROFILE_FILE="main3.profraw" ./main3 < testFiles/trapezoid.txt > testFiles/trapezoidOutput.txt
 #./main < testFiles/trapezoid.txt > testFiles/trapezoidOutput.txt
-#diff testFiles/trapezoidOutput.txt testFiles/trapezoidExpected.txt
+diff testFiles/trapezoidOutput.txt testFiles/trapezoidExpected.txt
 
 err4=$?
 if [ $err4 -eq 0 ]
 then
     echo "trapezoid tests passed!"
-    echo "OKAY, ALL TESTS PASSED!"
+#    echo "OKAY, ALL TESTS PASSED!"
 elif [ $err4 -eq 1 ]
 then
     echo "trapezoid tests failed!"
@@ -71,5 +71,47 @@ else
     echo "trapezoid tests failed to run properly"
 fi
 
-xcrun llvm-profdata merge -sparse main.profraw main1.profraw main2.profraw main3.profraw -o master.profdata
-xcrun llvm-cov show ./main -instr-profile=master.profdata
+
+clang++ -std=c++14 -O1 -g -fsanitize=address -fprofile-instr-generate -fcoverage-mapping main.cpp functions.cpp -o main4
+LLVM_PROFILE_FILE="main4.profraw" ./main4 < testFiles/parallelogram.txt > testFiles/parallelogramOutput.txt
+diff testFiles/parallelogramOutput.txt testFiles/parallelogramExpected.txt
+
+err5=$?
+if [ $err5 -eq 0 ]
+then
+    echo "parallelogram tests passed!"
+    echo "OKAY, ALL TESTS PASSED!"
+elif [ $err5 -eq 1 ]
+then
+    echo "parallelogram tests failed!"
+
+else
+    echo "parallelogram tests failed to run properly"
+fi
+
+
+#for i in `seq 1 1000`;
+#do
+#    output="output"
+#    ./main < "testFiles/$i.txt" > "testFiles/$output$i.txt"
+#done
+
+#for testing to see the out put in the terminal
+#for i in `seq 1 1000`;
+#do
+#    LLVM_PROFILE_FILE="testFiles/$i.profraw" ./main < testFiles/$i.txt
+#done
+
+##for testing to see the out put in the terminal
+#LLVM_PROFILE_FILE="main.profraw" ./main < testFiles/square.txt
+#LLVM_PROFILE_FILE="main.profraw" ./main < testFiles/rectangle.txt
+#LLVM_PROFILE_FILE="main.profraw" ./main < testFiles/trapezoid.txt
+#LLVM_PROFILE_FILE="main.profraw" ./main < testFiles/rhombus.txt
+#LLVM_PROFILE_FILE="main.profraw" ./main < testFiles/parallelogram.txt
+
+
+
+# merging files then writing the coverage output to a text file called COVERAGE.txt
+xcrun llvm-profdata merge -sparse main.profraw main1.profraw main2.profraw main3.profraw main4.profraw -o master.profdata
+xcrun llvm-cov show ./main -instr-profile=master.profdata > COVERAGE.txt
+#xcrun llvm-cov show ./main1 -instr-profile=master.profdata >> COVERAGE.txt

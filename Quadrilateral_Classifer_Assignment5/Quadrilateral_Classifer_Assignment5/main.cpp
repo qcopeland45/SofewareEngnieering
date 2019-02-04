@@ -40,14 +40,22 @@ int main(int argc, const char * argv[])
     
     string line;
     vector<double> points;
+    bool isBlank = true;
+    
     while (getline(cin, line)) {
-        points = ParseString(line);
-        Quadrilateral quad;
-        SortCordinants(points, quad);
-        CalculateLength(quad);
-        CalculateSlope(quad);
-        printCorrectShape(quad);
+        isBlank = false;
+        if (!isBlank) {
+            points = ParseString(line);
+            Quadrilateral quad;
+            SortCordinants(points, quad);
+            CalculateLength(quad);
+            CalculateSlope(quad);
+            printCorrectShape(quad);
+        }
     }
+    
+    if (isBlank)
+        cout << "error 1 no line present: " << endl;
 
     
     return 0;
