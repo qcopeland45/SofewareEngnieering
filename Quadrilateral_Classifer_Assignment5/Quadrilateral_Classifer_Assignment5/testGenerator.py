@@ -174,8 +174,8 @@ def generate_rand_shape_0_to_300():
     num = 1
     for i in range(300):
         file = open(path + str(num) + ".txt", "w")
-        file.write(str(random.randint(0, 10)) + " " + str(random.randint(0, 30)) + " " + str(random.randint(0, 20))
-                   + " " + str(random.randint(0, 10)) + " " + str(random.randint(0, 5)) + "\n")
+        file.write(str(random.randint(0, 100)) + " " + str(random.randint(0, 100)) + " " + str(random.randint(0, 100))
+                   + " " + str(random.randint(0, 100)) + " " + str(random.randint(0, 100)) + " " + str(random.randint(0, 100)) + "\n")
         num += 1
     file.close()
 
@@ -185,7 +185,7 @@ def generate_rand_shape_to_600():
     for i in range(300):
         file = open(path + str(num) + ".txt", "w")
         file.write(str(random.randint(0, 10)) + " " + str(random.randint(0, 10)) + " " + str(random.randint(0, 10))
-                   + " " + str(random.randint(0, 10)) + " " + str(random.randint(0, 10)) + "\n")
+                   + " " + str(random.randint(0, 30)) + " " + str(random.randint(0, 30)) + " " + str(random.randint(0, 30)) + "\n")
         num += 1
     file.close()
 

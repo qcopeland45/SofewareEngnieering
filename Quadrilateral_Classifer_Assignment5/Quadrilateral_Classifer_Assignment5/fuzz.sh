@@ -90,17 +90,17 @@ else
 fi
 
 
-#for i in `seq 1 1000`;
-#do
-#    output="output"
-#    ./main < "testFiles/$i.txt" > "testFiles/$output$i.txt"
-#done
+for i in `seq 1 1000`;
+do
+    output="output"
+    ./main < "testFiles/$i.txt" > "testFiles/$output$i.txt"
+done
 
 #for testing to see the out put in the terminal
-#for i in `seq 1 1000`;
-#do
-#    LLVM_PROFILE_FILE="testFiles/$i.profraw" ./main < testFiles/$i.txt
-#done
+for i in `seq 1 1000`;
+do
+    LLVM_PROFILE_FILE="testFiles/$i.profraw" ./main < testFiles/$i.txt
+done
 
 ##for testing to see the out put in the terminal
 #LLVM_PROFILE_FILE="main.profraw" ./main < testFiles/square.txt
