@@ -120,26 +120,6 @@ def rhombus_answer_key():
 
 
 
-# def generate_kite():
-#     file = open(path + "kite.txt", "w")
-#     x1 = 2
-#     y1 = 1
-#     x2 = 2
-#     y2 = 2
-#     x3 = 1
-#     y3 = 2
-#
-#     for i in range(98):
-#         line = str(x1) + " " + str(y1) + " " + str(x2) + " " + str(y2) + " " + str(x3) + " " + str(x3) + "\n"
-#         file.write(line)
-#         x1 += 1
-#         x2 += 1
-#         x3 += 1
-#         y1 += 1
-#         y2 += 1
-#         y3 += 1
-#     file.close()
-
 
 #1 0 2 1 1 1
 def generate_parallelogram():
@@ -169,6 +149,38 @@ def parallelogram_answer_key():
     file.close()
 
 
+def generate_colinear_points():
+    num = 1
+    x1 = 1
+    y1 = 1
+    x2 = 2
+    y2 = 2
+    x3 = 3
+    y3 = 3
+
+    for i in range(97):
+        file = open(path + "colinear" + str(num) + ".txt", "w")
+        line = str(x1) + " " + str(y1) + " " + str(x2) + " " + str(y2) + " " + str(x3) + " " + str(y3) + "\n"
+        file.write(line)
+        num += 1
+        x1 += 1
+        x2 += 1
+        x3 += 1
+        y1 += 1
+        y2 += 1
+        y3 += 1
+    file.close()
+
+
+def colinear_answer_key():
+    num = 1
+    for i in range(97):
+        file = open(path + "colinearExpected" + str(num) + ".txt", "w")
+        file.write("Error 4: Colinear points\n")
+        num += 1
+        file.close()
+
+
 
 def generate_rand_shape_0_to_300():
     num = 1
@@ -185,7 +197,7 @@ def generate_rand_shape_to_600():
     for i in range(300):
         file = open(path + str(num) + ".txt", "w")
         file.write(str(random.randint(0, 10)) + " " + str(random.randint(0, 10)) + " " + str(random.randint(0, 10))
-                   + " " + str(random.randint(0, 30)) + " " + str(random.randint(0, 30)) + " " + str(random.randint(0, 30)) + "\n")
+                   + " " + str(random.randint(0, 10)) + " " + str(random.randint(0, 10)) + " " + str(random.randint(0, 10)) + "\n")
         num += 1
     file.close()
 
@@ -208,11 +220,13 @@ generate_trapezoid()
 generate_rhombus()
 #generate_kite()
 generate_parallelogram()
+generate_colinear_points()
 square_answer_key()
 rectangle_answer_key()
 rhombus_answer_key()
 trapezoid_answer_key()
 parallelogram_answer_key()
+colinear_answer_key()
 generate_rand_shape_0_to_300()
 generate_rand_shape_to_600()
 generate_rand_character_length()
