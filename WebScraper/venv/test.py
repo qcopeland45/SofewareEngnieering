@@ -46,7 +46,7 @@ def get_show_history(username, password):
             shows_list.append(title)
             print(title)
 
-        
+
         write_showlist("shows_list.txt", shows_list)
 
         print(len(shows_list))
@@ -150,8 +150,8 @@ def remove_show_from_queue(showToRemove, username, password):
 
 
 
-password = "Qc981300"
-usermame = "qcopeland45@gmail.com"
+password = "SuperDuperFake"
+usermame = "fake fake fake "
 
 # remove_show_from_queue("The Handmaid's Tale",usermame,password)
 get_show_history(usermame, password)
