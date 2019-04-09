@@ -1,6 +1,6 @@
 make:
 #compile and link main.cpp and simulator.cpp into simulator
-	clang++ -std=c++17 -fsanitize=address -o simulator QueueSimulation/main.cpp QueueSimulation/simulator.cpp 
+	clang++ -std=c++17 -fsanitize=address -o simulator QueueSimulation/main.cpp QueueSimulation/base.cpp QueueSimulation/bank.cpp QueueSimulation/grocery.cpp QueueSimulation/event.cpp   
 
 run:
 	./simulator $(arg1) $(arg2) $(arg3)

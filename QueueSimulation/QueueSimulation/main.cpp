@@ -13,8 +13,9 @@
 #include <array>
 #include <iomanip>
 
-#include "simulator.hpp"
-
+#include "bank.hpp"
+#include "grocery.hpp"
+#include "event.hpp"
 
 void printPercentiles (std::vector<int> &serviceTimes, std::string name) {
     
